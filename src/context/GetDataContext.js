@@ -3,6 +3,7 @@ export const GetDataContext = createContext();
 
 const GetDataProvider = (props) => {
   const [stateGetData, setStateGetData] = useState(false);
+  const [drinks, setDrink] = useState([]);
 
   const [dataSearch, setDataSearch] = useState({
     search: "",
@@ -12,13 +13,13 @@ const GetDataProvider = (props) => {
   const { search, category } = dataSearch;
 
   useEffect(() => {
-    if (stateGetData === true) {
+    if (stateGetData) {
       const getDrink = async () => {
         let url = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${search}&c=${category}`;
 
         let response = await fetch(url);
         let resJson = await response.json();
-        console.log(resJson.drinks);
+        setDrink(resJson.drinks);
       };
 
       getDrink();
@@ -30,6 +31,7 @@ const GetDataProvider = (props) => {
     <GetDataContext.Provider
       value={{
         dataSearch,
+        drinks,
         setDataSearch,
         setStateGetData,
       }}

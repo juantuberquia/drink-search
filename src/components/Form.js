@@ -60,6 +60,7 @@ const Form = () => {
             onChange={handleChange}
           >
             <option value=""> --Seleccionar categoria--</option>
+
             {categories.map((drink) => (
               <option key={drink.strCategory} value={drink.strCategory}>
                 {drink.strCategory}
